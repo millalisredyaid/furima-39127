@@ -59,3 +59,4 @@
 
 - belongs_to :user
 - belongs_to :item, foreign_key: "item_id", class_name: "Item"
+
