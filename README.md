@@ -4,19 +4,20 @@
 
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
-| id              | integer |             |
 | nickname        | string  | null: false |
 | email           | string  | null: false |
-| password_digest | string  | null: false |
+| encrypted_password | string  | null: false |
 | name            | string  |             |
-| address         | string  | null: false |
 | birth_date      | string  | null: false |
-
+| created_at      | datetime|             |
+| updated_at      | datetime|             |
+| reset_password_sent_at| timestamp  | null: true |
 
 ### Association
 
 - has_many :items
 - has_many :purchases
+- belongs_to :user
 
 ## 商品出品機能
 
@@ -24,7 +25,6 @@
 
 | Column        | Type    | Options                        |
 | ------------ | ------- | ------------------------------ |
-| id           | integer |                                |
 | name         | string  | null: false                    |
 | description  | text    | null: false                    |
 | category_id  | integer | null: false                    |
@@ -32,6 +32,8 @@
 | shipping_from| integer | null: false                    |
 | days_to_ship | integer | null: false                    |
 | price        | integer | null: false                    |
+| shipping_to  | integer | null: false                    |
+| user_id      | reference| null: false, foreign_key: true|
 
 ### Association
 
@@ -45,9 +47,20 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| id          | integer  |                                |
-| user        | referemce | null: false, foreign_key: true |
+| user_id     | referemce | null: false, foreign_key: true |
 | item        | referemce | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+
+
+### addresses テーブル
+
+| Column      | Type     | Options                        |
+| ------------| -------- | ------------------------------ |
+| user_id     | referemce| null: false, foreign_key: true |
 | postal_code | string   | null: false                    |
 | prefecture  | integer  | null: false                    |
 | city        | string   | null: false                    |
