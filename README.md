@@ -5,18 +5,17 @@
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
 | nickname        | string  | null: false |
-| email           | string  | null: false |
+| email           | string  | unique: true |
 | encrypted_password | string  | null: false |
-| name            | string  |             |
-| birth_date      | string  | null: false |
-| created_at      | datetime|             |
-| updated_at      | datetime|             |
-| reset_password_sent_at| timestamp  | null: true |
+| family_name     | string  | null: false |
+|  given_name     | string  | null: false |
+| family_name_kana     | string  | null: false |
+| given_name_kana   | string  | null: false |
+| birth_date      | date  | null: false |
 
 ### Association
 
 - has_many :items
-- has_many :purchases
 - belongs_to :user
 
 ## 商品出品機能
@@ -28,12 +27,13 @@
 | name         | string  | null: false                    |
 | description  | text    | null: false                    |
 | category_id  | integer | null: false                    |
-| condition    | integer | null: false                    |
-| shipping_from| integer | null: false                    |
-| days_to_ship | integer | null: false                    |
+| condition_id    | integer | null: false                    |
+| shipping_from_id| integer | null: false                    |
+| days_to_ship_id | integer | null: false                    |
 | price        | integer | null: false                    |
-| shipping_to  | integer | null: false                    |
-| user_id      | reference| null: false, foreign_key: true|
+| shipping_to_id  | integer | null: false                    |
+| prefecture_id   | integer | null: false                    |
+| user      | references| null: false, foreign_key: true|
 
 ### Association
 
@@ -47,22 +47,21 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| user_id     | referemce | null: false, foreign_key: true |
-| item        | referemce | null: false, foreign_key: true |
+| user     | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :item
-
+- has_one :address
 
 ### addresses テーブル
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
 | user_id     | referemce| null: false, foreign_key: true |
-| postal_code | string   | null: false                    |
-| prefecture  | integer  | null: false                    |
+| postal_code | string   | null: true                    |
+| prefecture_id  | integer  | null: false                    |
 | city        | string   | null: false                    |
 | address     | string   | null: false                    |
 | building    | string   |                                |
@@ -71,7 +70,6 @@
 ### Association
 
 - belongs_to :user
-
 - belongs_to :item, foreign_key: "item_id", class_name: "Item"
-
-
+- belongs_to :purchase
+- belongs_to :prefecture
