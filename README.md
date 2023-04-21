@@ -4,7 +4,6 @@
 
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
-| id              | integer |             |
 | nickname        | string  | null: false |
 | email           | string  | unique: true |
 | encrypted_password | string  | null: false |
@@ -25,7 +24,6 @@
 
 | Column        | Type    | Options                        |
 | ------------ | ------- | ------------------------------ |
-| id           | integer |                                |
 | name         | string  | null: false                    |
 | description  | text    | null: false                    |
 | category_id  | integer | null: false                    |
@@ -33,8 +31,7 @@
 | shipping_from_id| integer | null: false                    |
 | days_to_ship_id | integer | null: false                    |
 | price        | integer | null: false                    |
-| shipping_to_id  | integer | null: false                    |
-| prefecture_id   | integer | null: false                    |
+| prefecture_id  | integer  | null: false                    |
 | user      | references| null: false, foreign_key: true|
 
 ### Association
@@ -49,7 +46,7 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| user     | references | null: false, foreign_key: true |
+| purchase     | references | null: false, foreign_key: true |
 | item        | references | null: false, foreign_key: true |
 
 ### Association
@@ -62,7 +59,7 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| user_id     | referemce| null: false, foreign_key: true |
+| user_id     | references | null: false, foreign_key: true |
 | postal_code | string   | null: true                    |
 | prefecture_id  | integer  | null: false                    |
 | city        | string   | null: false                    |
@@ -72,8 +69,6 @@
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item, foreign_key: "item_id", class_name: "Item"
 - belongs_to :purchase
 - belongs_to :prefecture
 
