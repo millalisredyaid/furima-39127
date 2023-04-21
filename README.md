@@ -6,12 +6,13 @@
 | --------------- | ------- | ----------- |
 | id              | integer |             |
 | nickname        | string  | null: false |
-| email           | string  | null: false |
-| password_digest | string  | null: false |
-| name            | string  |             |
-| address         | string  | null: false |
-| birth_date      | string  | null: false |
-
+| email           | string  | unique: true |
+| encrypted_password | string  | null: false |
+| family_name     | string  | null: false |
+|  given_name     | string  | null: false |
+| family_name_kana     | string  | null: false |
+| given_name_kana   | string  | null: false |
+| birth_date      | date  | null: false |
 
 ### Association
 
@@ -29,9 +30,12 @@
 | description  | text    | null: false                    |
 | category_id  | integer | null: false                    |
 | condition    | integer | null: false                    |
-| shipping_from| integer | null: false                    |
-| days_to_ship | integer | null: false                    |
+| shipping_from_id| integer | null: false                    |
+| days_to_ship_id | integer | null: false                    |
 | price        | integer | null: false                    |
+| shipping_to_id  | integer | null: false                    |
+| prefecture_id   | integer | null: false                    |
+| user      | references| null: false, foreign_key: true|
 
 ### Association
 
@@ -45,11 +49,22 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| id          | integer  |                                |
-| user        | referemce | null: false, foreign_key: true |
-| item        | referemce | null: false, foreign_key: true |
-| postal_code | string   | null: false                    |
-| prefecture  | integer  | null: false                    |
+| user     | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :address
+
+### addresses テーブル
+
+| Column      | Type     | Options                        |
+| ------------| -------- | ------------------------------ |
+| user_id     | referemce| null: false, foreign_key: true |
+| postal_code | string   | null: true                    |
+| prefecture_id  | integer  | null: false                    |
 | city        | string   | null: false                    |
 | address     | string   | null: false                    |
 | building    | string   |                                |
@@ -59,4 +74,7 @@
 
 - belongs_to :user
 - belongs_to :item, foreign_key: "item_id", class_name: "Item"
+- belongs_to :purchase
+- belongs_to :prefecture
+
 
