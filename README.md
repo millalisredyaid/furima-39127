@@ -25,9 +25,9 @@
 | Column        | Type    | Options                        |
 | ------------ | ------- | ------------------------------ |
 | name         | string  | null: false                    |
-| description  | text    | null: false                    |
+| description_id  | text    | null: false                    |
 | category_id  | integer | null: false                    |
-| condition    | integer | null: false                    |
+| condition_id | integer | null: false                    |
 | shipping_from_id| integer | null: false                    |
 | days_to_ship_id | integer | null: false                    |
 | price        | integer | null: false                    |
@@ -59,7 +59,7 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| user_id     | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 | postal_code | string   | null: true                    |
 | prefecture_id  | integer  | null: false                    |
 | city        | string   | null: false                    |
