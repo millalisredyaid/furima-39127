@@ -5,7 +5,7 @@
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
 | nickname        | string  | null: false |
-| email           | string  | unique: true |
+| email           | string  | null: false |
 | encrypted_password | string  | null: false |
 | family_name     | string  | null: false |
 |  given_name     | string  | null: false |
@@ -59,17 +59,10 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| purchases   | references | null: false, foreign_key: true |
+| purchase   | references | null: false, foreign_key: true |
 | postal_code | string   | null: true                    |
 | prefecture_id  | integer  | null: false                    |
 | city        | string   | null: false                    |
 | address     | string   | null: false                    |
 | building    | string   |                                |
 | phone       | string   | null: false                    |
-
-### Association
-
-- belongs_to :purchase
-- belongs_to :prefecture
-
-
