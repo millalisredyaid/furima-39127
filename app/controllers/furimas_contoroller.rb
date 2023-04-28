@@ -1,5 +1,5 @@
 class FurimasController < ApplicationController
   def index
-    furimas = Tweet.all
+    @furimas = furima.all
   end
 end
