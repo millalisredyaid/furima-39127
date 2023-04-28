@@ -10,7 +10,7 @@ class User < ApplicationRecord
          validates :last_name_kana, presence: true
          validates :first_name_kana, presence: true
          validates :birth_date, presence: true
-         validates :password, presence: true, length: { minimum: 6 }, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/, message: "is invalid. Include both letters and numbers" }
+         validates :password, presence: true, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/, message: "is invalid. Include both letters and numbers" }
         
 
          #has_many :items
