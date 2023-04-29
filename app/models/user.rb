@@ -12,10 +12,26 @@ class User < ApplicationRecord
          validates :birth_date, presence: true
          validates :password, presence: true, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/, message: "is invalid. Include both letters and numbers" }
          validate :password_length
+         validate :password_not_only_digits
+         validate :password_not_contain_full_width_characters
+         validate :password_not_only_alphabets
 
 def password_length
   errors.add(:password, 'is too long (maximum is 128 characters)') if password.present? && password.length > 128
 end
+
+def password_not_only_digits
+  errors.add(:password, 'is invalid. Input both letters and numbers') if password.present? && password.match(/\A\d+\z/)
+end
+
+def password_not_contain_full_width_characters
+  errors.add(:password, 'is invalid. Input half-width characters') if password.present? && password.match(/[^\x01-\x7E]/)
+end
+
+def password_not_only_alphabets
+  errors.add(:password, 'is invalid. Input both letters and numbers') if password.present? && password.match(/\A[a-zA-Z]+\z/)
+end
+
          #has_many :items
 
          

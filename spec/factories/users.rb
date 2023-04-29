@@ -10,9 +10,5 @@ FactoryBot.define do
     first_name_kana { "ミライ" }
     birth_date { "1990-01-01" }
     
-    trait :invalid_password do
-      password { '123456' }
-      password_confirmation { '123456' }
-    end 
   end
 end
