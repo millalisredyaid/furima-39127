@@ -8,6 +8,7 @@ RSpec.describe Item, type: :model do
   describe '商品の保存' do
     context '商品が投稿できる場合' do
       it '画像と商品が投稿できる' do
+        expect(@item).to be_valid
       end
     end
     context '商品が投稿できない場合' do  
