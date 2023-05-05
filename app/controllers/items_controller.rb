@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # before_action :contributor_confirmation, only: [:edit, :update, :destroy]
   
   def index
-    # @item = Item.includes(:user)
+    @items = Item.all
   end
 
   # def show
@@ -50,8 +50,8 @@ class ItemsController < ApplicationController
   end    
   
 
-  # def set_item
-  #   @item = Item.find(params[:id])
-  # end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
 end
