@@ -24,14 +24,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+
     if current_user != @item.user
       redirect_to root_path, alert: "This item is not allowed to be edited."
     end
   end  
 
   def update
-    item = Item.find(params[:id])
+    
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
