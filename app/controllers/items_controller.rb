@@ -1,14 +1,11 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  # before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show]
   # before_action :contributor_confirmation, only: [:edit, :update, :destroy]
   
   def index
     @items = Item.order(created_at: :desc)
   end
-
-  # def show
-  # end
   
   def new
     @item = Item.new
@@ -23,13 +20,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   # def edit
   #   @item = Item.find(params[:id])
   # end  
 
   # def update
+  #   item = Item.find(params[:id])
   #   if @item.update(item_params)
-  #     redirect_to prototype_path(@item)
+  #     redirect_to item_path(@item)
   #   else
   #     render :edit
   #   end
@@ -50,8 +51,8 @@ class ItemsController < ApplicationController
   end    
   
 
-  # def set_item
-  #   @item = Item.find(params[:id])
-  # end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
 end
