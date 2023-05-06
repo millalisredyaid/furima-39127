@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show]
+  before_action :set_item, only: [:show, :edit, :update]
   # before_action :contributor_confirmation, only: [:edit, :update, :destroy]
   
   def index
@@ -23,18 +23,21 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end  
+  def edit
 
-  # def update
-  #   item = Item.find(params[:id])
-  #   if @item.update(item_params)
-  #     redirect_to item_path(@item)
-  #   else
-  #     render :edit
-  #   end
-  # end
+    if current_user != @item.user
+      redirect_to root_path, alert: "This item is not allowed to be edited."
+    end
+  end  
+
+  def update
+    
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+  end
 
   # def destroy
   #   if @item.destroy
