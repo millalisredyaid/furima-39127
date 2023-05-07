@@ -23,5 +23,7 @@ def password_not_contain_full_width_characters
   errors.add(:password, "is invalid. Input full-width characters") if password.present? && password.match?(/[^\x01-\x7E]/)
 end
 
-         has_many :items        
+         has_many :items
+         has_many :orders      
 end
+

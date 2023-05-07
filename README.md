@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchases
+- has_many :orders
 
 ## 商品出品機能
 
@@ -24,25 +24,25 @@
 
 | Column        | Type    | Options                        |
 | ------------ | ------- | ------------------------------ |
-| name         | string  | null: false                    |
-| description  | text    | null: false                    |
+| item_name    | string  | null: false                    |
+| item_info    | text    | null: false                    |
 | category_id  | integer | null: false                    |
 | condition_id | integer | null: false                    |
-| shipping_from_id| integer | null: false                    |
+| shipping_fee_status_id| integer | null: false                    |
 | days_to_ship_id | integer | null: false                    |
 | price        | integer | null: false                    |
 | prefecture_id  | integer  | null: false                    |
-| user      | references| null: false, foreign_key: true|
+| user         | references| null: false, foreign_key: true|
 
 ### Association
 
 - belongs_to :user
 - has_one_attached :image
-- has_one :purchase
+- has_one :orders
 
 ## 商品購入機能
 
-### purchases テーブル
+### orders テーブル
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
@@ -59,10 +59,11 @@
 
 | Column      | Type     | Options                        |
 | ------------| -------- | ------------------------------ |
-| purchase   | references | null: false, foreign_key: true |
+| orders      | references | null: false, foreign_key: true |
 | postal_code | string   | null: true                    |
 | prefecture_id  | integer  | null: false                    |
 | city        | string   | null: false                    |
-| address     | string   | null: false                    |
+| street      | string   | null: false                    |
 | building    | string   |                                |
 | phone       | string   | null: false                    |
+| user_id     | 
