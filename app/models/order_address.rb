@@ -1,21 +1,26 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :address_postal_code, :address_prefecture, :address_city, :address_street, :address_building, :address_phone, :orders_id
+  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :street, :building, :phone, :order_id, :token, :item_price
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
-    # validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000000, message: 'is invalid'}
+    validates :item_id
     validates :user_id
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
+    validates :city
+    validates :street
+    # validates :phone, format: {with: /\A\d{10}$|^\d{11}\z/, message: "is invalid"}
+    validates :phone, format: { with: /\A[0-9]+\z/, message: "Input only number" }
+    validates :token
   end
-  validates :prefecture, numericality: {other_than: 0, message: "can't be blank"}
+    validates :phone, length: { minimum: 10, message: "Phone number is too short" }
+
   
   def save
-    def save
       order = Order.create(item_id: item_id, user_id: user_id)
-      
-      Address.create(postal_code: postal_code, prefecture: prefecture, city: city, street: street, building: building, oeder_id: oeder.id)
+
+      Address.create!(postal_code: postal_code, prefecture_id: prefecture_id, city: city, street: street, building: building, phone: phone, order_id: order.id)
     end 
-  end
 
 end
