@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :street, :building, :phone, :order_id, :token, :item_price
+  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :street, :building, :phone, :order_id, :token
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
@@ -11,10 +11,10 @@ class OrderAddress
     validates :city
     validates :street
     # validates :phone, format: {with: /\A\d{10}$|^\d{11}\z/, message: "is invalid"}
-    validates :phone, format: { with: /\A[0-9]+\z/, message: "Input only number" }
+    validates :phone, format: { with: /\A[0-9]+\z/, message: "is invalid. Input only number" }
     validates :token
   end
-    validates :phone, length: { minimum: 10, message: "Phone number is too short" }
+    validates :phone, length: { minimum: 10, message: " Phone is invalid. Input only number" }
 
   
   def save
