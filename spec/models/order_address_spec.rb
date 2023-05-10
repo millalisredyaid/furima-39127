@@ -55,6 +55,32 @@ RSpec.describe OrderAddress, type: :model do
           @order_address.valid?
           expect(@order_address.errors.full_messages).to include("Token can't be blank")
         end
+        it 'phoneが9桁以下では購入できない' do
+          @order_address.phone = '123456789'
+          @order_address.valid?
+          expect(@order_address.errors.full_messages).to include("Phone is invalid. Input only number")
+        end
+        it 'phoneが12桁以上では購入できない' do
+          @order_address.phone = '123456789012'
+          @order_address.valid?
+          expect(@order_address.errors.full_messages).to include("Phone is invalid. Input only number")
+        end
+        it 'phoneに数値以外が含まれている場合は購入できない' do
+          @order_address.phone = '1234567a89'
+          @order_address.valid?
+          expect(@order_address.errors.full_messages).to include("Phone is invalid. Input only number")
+        end
+        it '番地が空では購入できない' do
+          @order_address.street = ''
+          @order_address.valid?
+          expect(@order_address.errors.full_messages).to include("Street can't be blank")
+        end
+        it '商品が紐付いていないと購入できない' do
+          @order_address.item_id = nil
+          @order_address.valid?
+          expect(@order_address.errors.full_messages).to include("Item can't be blank")
+        end        
+      
     end
   end
 end
