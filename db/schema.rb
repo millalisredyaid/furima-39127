@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 2023_05_09_094246) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.binary "image"
     t.integer "item_price"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
